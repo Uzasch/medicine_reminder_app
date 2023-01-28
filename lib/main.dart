@@ -61,6 +61,24 @@ class MyApp extends StatelessWidget {
               color: kTextColor,
             ),
           ),
+          inputDecorationTheme: const InputDecorationTheme(
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                color: kTextLightColor,
+                width: 0.7,
+              ),
+            ),
+            border: UnderlineInputBorder(
+              borderSide: BorderSide(
+                color: kTextLightColor,
+              ),
+            ),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                color: kPrimaryColor,
+              ),
+            ),
+          ),
         ),
         home: const HomePage(),
       );

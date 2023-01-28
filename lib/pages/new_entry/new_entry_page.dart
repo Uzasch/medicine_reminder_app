@@ -11,13 +11,42 @@ class NewEntryPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Add New'),
       ),
-      body: Column(
-        children: [
-          PanelTitle(
-            title: "Medicine Name",
-            isRequired: true,
-          ),
-        ],
+      body: Padding(
+        padding: EdgeInsets.all(2.h),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const PanelTitle(
+              title: "Medicine Name",
+              isRequired: true,
+            ),
+            TextFormField(
+              maxLength: 15,
+              textCapitalization: TextCapitalization.words,
+              decoration: const InputDecoration(
+                border: UnderlineInputBorder(),
+              ),
+              style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                    color: kOtherColor,
+                  ),
+            ),
+            const PanelTitle(
+              title: "Dosage in mg",
+              isRequired: false,
+            ),
+            TextFormField(
+              maxLength: 15,
+              keyboardType: TextInputType.number,
+              textCapitalization: TextCapitalization.words,
+              decoration: const InputDecoration(
+                border: UnderlineInputBorder(),
+              ),
+              style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                    color: kOtherColor,
+                  ),
+            )
+          ],
+        ),
       ),
     );
   }
