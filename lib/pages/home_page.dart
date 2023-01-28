@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mra/constants.dart';
+import 'package:mra/pages/new_entry/new_entry_page.dart';
 import 'package:sizer/sizer.dart';
 
 class HomePage extends StatelessWidget {
@@ -24,26 +25,32 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: InkResponse(
-        onTap: () {
-          //go to new entry page
-        },
-        child: SizedBox(
-          width: 22.w,
-          height: 10.h,
-          child: Card(
-            color: kPrimaryColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(5.h),
-            ),
-            child: Icon(
-              Icons.add_outlined,
-              color: kScaffoldColor,
-              size: 20.sp,
-            ),
-          ),
-        ),
-      ),
+      // floatingActionButton: InkResponse(
+      //   onTap: () {
+      //     //go to new entry page
+      //     Navigator.push(
+      //       context,
+      //       MaterialPageRoute(
+      //         builder: (context) => const NewEntryPage(),
+      //       ),
+      //     );
+      //   },
+      //   child: SizedBox(
+      //     width: 22.w,
+      //     height: 10.h,
+      //     child: Card(
+      //       color: kPrimaryColor,
+      //       shape: RoundedRectangleBorder(
+      //         borderRadius: BorderRadius.circular(5.h),
+      //       ),
+      //       child: Icon(
+      //         Icons.add_outlined,
+      //         color: kScaffoldColor,
+      //         size: 20.sp,
+      //       ),
+      //     ),
+      //   ),
+      // ),
     );
   }
 }
