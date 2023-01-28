@@ -51,6 +51,22 @@ class HomePage extends StatelessWidget {
       //     ),
       //   ),
       // ),
+      floatingActionButton: InkResponse(
+        onTap: () {},
+        child: SizedBox(
+          child: Card(
+            color: kPrimaryColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5.h),
+            ),
+            child: Icon(
+              Icons.add_outlined,
+              color: kScaffoldColor,
+              size: 50.sp,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
