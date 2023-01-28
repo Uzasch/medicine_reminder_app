@@ -27,7 +27,17 @@ class MyApp extends StatelessWidget {
             toolbarHeight: 7.h,
             backgroundColor: kScaffoldColor,
             elevation: 0,
+            iconTheme: IconThemeData(
+              color: kSecondaryColor,
+              size: 20.sp,
+            ),
+            titleTextStyle: GoogleFonts.mulish(
+                color: kTextColor,
+                fontWeight: FontWeight.w800,
+                fontStyle: FontStyle.normal,
+                fontSize: 20.sp),
           ),
+
           textTheme: TextTheme(
             headline3: GoogleFonts.raleway(
               fontSize: 30.sp,
@@ -45,6 +55,11 @@ class MyApp extends StatelessWidget {
               color: kTextColor,
             ),
             subtitle2: GoogleFonts.poppins(fontSize: 12.sp, color: kTextColor),
+            labelMedium: TextStyle(
+              fontSize: 10.sp,
+              fontWeight: FontWeight.w500,
+              color: kTextColor,
+            ),
           ),
         ),
         home: const HomePage(),

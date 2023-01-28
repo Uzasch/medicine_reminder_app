@@ -52,7 +52,15 @@ class HomePage extends StatelessWidget {
       //   ),
       // ),
       floatingActionButton: InkResponse(
-        onTap: () {},
+        onTap: () {
+          //go to new entry page
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const NewEntryPage(),
+            ),
+          );
+        },
         child: SizedBox(
           child: Card(
             color: kPrimaryColor,
