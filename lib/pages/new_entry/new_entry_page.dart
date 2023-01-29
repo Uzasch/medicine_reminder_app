@@ -224,8 +224,9 @@ class IntervalSelection extends StatefulWidget {
   State<IntervalSelection> createState() => _IntervalSelectionState();
 }
 
+//Drop down for selecting hours 1,2,3,4,5,6 >....
 class _IntervalSelectionState extends State<IntervalSelection> {
-  final _intervals = [1, 6, 8, 12, 24];
+  final _intervals = [1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 24, 48, 72, 168];
   var _selected = 0;
   @override
   Widget build(BuildContext context) {
@@ -283,6 +284,7 @@ class _IntervalSelectionState extends State<IntervalSelection> {
   }
 }
 
+// Icons Declaration function
 class MedicineTypeColumn extends StatelessWidget {
   const MedicineTypeColumn(
       {Key? key,
