@@ -55,9 +55,14 @@ class MyApp extends StatelessWidget {
               color: kTextColor,
             ),
             subtitle2: GoogleFonts.poppins(fontSize: 12.sp, color: kTextColor),
+            caption: GoogleFonts.poppins(
+              fontSize: 9.sp,
+              fontWeight: FontWeight.w500,
+              color: kPrimaryColor,
+            ),
             labelMedium: TextStyle(
               fontSize: 10.sp,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w400,
               color: kTextColor,
             ),
           ),

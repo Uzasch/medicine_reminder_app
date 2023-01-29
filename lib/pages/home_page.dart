@@ -67,7 +67,7 @@ class TopContainer extends StatelessWidget {
             bottom: 1.h,
           ),
           child: Text(
-            'Worry Less. \nLive Healthier. ',
+            'We Take Care \nOf Your Health. ',
             textAlign: TextAlign.start,
             style: Theme.of(context).textTheme.headline4,
           ),

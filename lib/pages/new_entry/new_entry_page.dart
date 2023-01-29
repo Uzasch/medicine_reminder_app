@@ -3,6 +3,7 @@ import 'package:mra/constants.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../common/convert_time.dart';
 import '../../models/medicine_type.dart';
 
 class NewEntryPage extends StatefulWidget {
@@ -47,10 +48,7 @@ class _NewEntryPageState extends State<NewEntryPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const PanelTitle(
-              title: "Medicine Name",
-              isRequired: true,
-            ),
+            const PanelTitle(title: "Medicine Name", isRequired: true),
             TextFormField(
               maxLength: 15,
               controller: dosageController,
@@ -62,10 +60,7 @@ class _NewEntryPageState extends State<NewEntryPage> {
                     color: kOtherColor,
                   ),
             ),
-            const PanelTitle(
-              title: "Dosage in mg",
-              isRequired: false,
-            ),
+            const PanelTitle(title: "Dosage in mg", isRequired: false),
             TextFormField(
               maxLength: 15,
               keyboardType: TextInputType.number,
@@ -77,9 +72,7 @@ class _NewEntryPageState extends State<NewEntryPage> {
                     color: kOtherColor,
                   ),
             ),
-            SizedBox(
-              height: 2.5.h,
-            ),
+            SizedBox(height: 1.h),
             const PanelTitle(title: 'Medicine Type', isRequired: false),
             Padding(
               padding: EdgeInsets.only(
@@ -113,7 +106,7 @@ class _NewEntryPageState extends State<NewEntryPage> {
                               : false),
                       MedicineTypeColumn(
                           medicineType: MedicineType.tablet,
-                          name: 'tablet',
+                          name: 'Tablet',
                           iconValue: 'assets/icons/tablet.svg',
                           isSelected: snapshot.data == MedicineType.tablet
                               ? true
@@ -123,12 +116,100 @@ class _NewEntryPageState extends State<NewEntryPage> {
                 },
               ),
             ),
-            const PanelTitle(
-              title: 'Interval Selection',
-              isRequired: true,
-            ),
+            const PanelTitle(title: 'Interval Selection', isRequired: true),
             const IntervalSelection(),
+            const PanelTitle(title: 'Starting Time', isRequired: true),
+            const SelectTime(),
+            SizedBox(height: 1.h),
+            // Padding(
+            //   padding: EdgeInsets.only(
+            //     left: 7.5.w,
+            //     right: 7.5.w,
+            //   ),
+            Center(
+              child: SizedBox(
+                width: 50.w,
+                height: 6.5.h,
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: kPrimaryColor,
+                    shape: const StadiumBorder(),
+                  ),
+                  child: Center(
+                    child: Text(
+                      'Confirm',
+                      style: Theme.of(context)
+                          .textTheme
+                          .subtitle2!
+                          .copyWith(color: kScaffoldColor),
+                    ),
+                  ),
+                  onPressed: () {
+                    //add medicine
+                  },
+                ),
+              ),
+            )
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class SelectTime extends StatefulWidget {
+  //change if necessary
+  const SelectTime({super.key});
+
+  @override
+  State<SelectTime> createState() => _SelectTimeState();
+}
+
+class _SelectTimeState extends State<SelectTime> {
+  TimeOfDay _time = const TimeOfDay(hour: 00, minute: 00);
+  bool _clicked = false;
+
+  Future<TimeOfDay> _selectTime() async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: _time,
+    );
+    if (picked != null && picked != _time) {
+      setState(() {
+        _time = picked;
+        _clicked = true;
+
+        //update state via provider
+      });
+    }
+    return picked!;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 7.5.h,
+      child: Padding(
+        padding: EdgeInsets.only(
+          top: 1.h,
+        ),
+        child: TextButton(
+          style: TextButton.styleFrom(
+              backgroundColor: kPrimaryColor, shape: const StadiumBorder()),
+          onPressed: () {
+            _selectTime();
+          },
+          child: Center(
+            child: Text(
+              _clicked == false
+                  ? 'Select Time'
+                  : "${convertTime(_time.hour.toString())}:${convertTime(_time.minute.toString())}",
+              style: Theme.of(context)
+                  .textTheme
+                  .subtitle2!
+                  .copyWith(color: kScaffoldColor),
+            ),
+          ),
         ),
       ),
     );
@@ -144,7 +225,7 @@ class IntervalSelection extends StatefulWidget {
 }
 
 class _IntervalSelectionState extends State<IntervalSelection> {
-  final _intervals = [6, 8, 12, 24];
+  final _intervals = [1, 6, 8, 12, 24];
   var _selected = 0;
   @override
   Widget build(BuildContext context) {
@@ -153,6 +234,7 @@ class _IntervalSelectionState extends State<IntervalSelection> {
         top: 1.h,
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             'Remind me every',
@@ -165,16 +247,20 @@ class _IntervalSelectionState extends State<IntervalSelection> {
             hint: _selected == 0
                 ? Text(
                     'Select an Interval',
-                    style: Theme.of(context).textTheme.subtitle2,
+                    style: Theme.of(context).textTheme.caption,
                   )
                 : null,
+            elevation: 4,
+            value: _selected == 0 ? null : _selected,
             items: _intervals.map(
               (int value) {
                 return DropdownMenuItem<int>(
                   value: value,
                   child: Text(
                     value.toString(),
-                    style: Theme.of(context).textTheme.subtitle2,
+                    style: Theme.of(context).textTheme.caption!.copyWith(
+                          color: kSecondaryColor,
+                        ),
                   ),
                 );
               },
@@ -186,6 +272,10 @@ class _IntervalSelectionState extends State<IntervalSelection> {
                 },
               );
             },
+          ),
+          Text(
+            _selected == 1 ? "hour" : "hours",
+            style: Theme.of(context).textTheme.subtitle2,
           ),
         ],
       ),
