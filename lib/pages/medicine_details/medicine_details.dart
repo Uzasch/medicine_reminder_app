@@ -24,6 +24,27 @@ class _MedicineDetailsState extends State<MedicineDetails> {
           children: [
             MainSection(),
             ExtendedSection(),
+            Spacer(),
+            SizedBox(
+              width: 100.w,
+              height: 7.5.h,
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: kSecondaryColor,
+                  shape: const StadiumBorder(),
+                ),
+                onPressed: () {
+                  //open alert dialog box, later
+                },
+                child: Text(
+                  'Delete',
+                  style: Theme.of(context).textTheme.subtitle1,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 2.5.h,
+            ),
           ],
         ),
       ),
