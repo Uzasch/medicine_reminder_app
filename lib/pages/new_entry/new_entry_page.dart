@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mra/constants.dart';
+import 'package:mra/pages/new_entry/new_entry_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -300,9 +302,11 @@ class MedicineTypeColumn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final NewEntryBloc newEntryBloc = Provider.of<NewEntryBloc>(context);
     return GestureDetector(
       onTap: () {
         //select medicine Type
+        // newEntryBloc.updateSelectedMedicine(medicineType);
       },
       child: Column(
         children: [
