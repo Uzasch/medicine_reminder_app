@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mra/constants.dart';
+import 'package:mra/pages/new_entry/new_entry_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'pages/home_page.dart';
 
@@ -8,52 +10,67 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
+  NewEntryBloc? newEntryBloc;
+  @override
+  void initState() {
+    newEntryBloc = NewEntryBloc();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Sizer(builder: (context, orientation, deviceType) {
-      return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'MRA',
-        //theme customization
-        theme: ThemeData.dark().copyWith(
-          primaryColor: kPrimaryColor,
-          scaffoldBackgroundColor: kScaffoldColor,
-          //appbar theme
-          appBarTheme: AppBarTheme(
-            toolbarHeight: 7.h,
-            backgroundColor: kScaffoldColor,
-            elevation: 0,
-            iconTheme: IconThemeData(
-              color: kSecondaryColor,
-              size: 20.sp,
-            ),
-            titleTextStyle: GoogleFonts.mulish(
-                color: kTextColor,
-                fontWeight: FontWeight.w800,
-                fontStyle: FontStyle.normal,
-                fontSize: 20.sp),
-          ),
+    return Provider<NewEntryBloc>.value(
+      value: newEntryBloc!,
+      child: Sizer(
+        builder: (context, orientation, deviceType) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'MRA',
+            //theme customization
+            theme: ThemeData.dark().copyWith(
+              primaryColor: kPrimaryColor,
+              scaffoldBackgroundColor: kScaffoldColor,
+              //appbar theme
+              appBarTheme: AppBarTheme(
+                toolbarHeight: 7.h,
+                backgroundColor: kScaffoldColor,
+                elevation: 0,
+                iconTheme: IconThemeData(
+                  color: kSecondaryColor,
+                  size: 20.sp,
+                ),
+                titleTextStyle: GoogleFonts.mulish(
+                    color: kTextColor,
+                    fontWeight: FontWeight.w800,
+                    fontStyle: FontStyle.normal,
+                    fontSize: 20.sp),
+              ),
 
-          textTheme: TextTheme(
-            headline3: GoogleFonts.raleway(
-              fontSize: 30.sp,
-              color: kSecondaryColor,
-              fontWeight: FontWeight.w700,
-            ),
-            headline4: GoogleFonts.raleway(
-              fontSize: 30.sp,
-              fontWeight: FontWeight.w800,
-              color: kTextColor,
-            ),
-            headline5: GoogleFonts.raleway(
-              fontSize: 45.sp,
-              fontWeight: FontWeight.w600,
-              color: kTextColor,
-            ),
+              textTheme: TextTheme(
+                headline3: GoogleFonts.raleway(
+                  fontSize: 30.sp,
+                  color: kSecondaryColor,
+                  fontWeight: FontWeight.w700,
+                ),
+                headline4: GoogleFonts.raleway(
+                  fontSize: 30.sp,
+                  fontWeight: FontWeight.w800,
+                  color: kTextColor,
+                ),
+                headline5: GoogleFonts.raleway(
+                  fontSize: 40.sp,
+                  fontWeight: FontWeight.w600,
+                  color: kTextColor,
+                ),
                 headline6: GoogleFonts.poppins(
                   fontSize: 13.sp,
                   color: kTextColor,
@@ -67,7 +84,7 @@ class MyApp extends StatelessWidget {
                 caption: GoogleFonts.poppins(
                   fontSize: 9.sp,
                   fontWeight: FontWeight.w500,
-                  color: kPrimaryColor,
+                  color: kTextLightColor,
                 ),
                 labelMedium: TextStyle(
                   fontSize: 10.sp,
@@ -110,6 +127,8 @@ class MyApp extends StatelessWidget {
             ),
             home: const HomePage(),
           );
-    });
+        },
+      ),
+    );
   }
 }

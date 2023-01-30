@@ -19,6 +19,7 @@ class _NewEntryPageState extends State<NewEntryPage> {
   late TextEditingController nameController;
   late TextEditingController dosageController;
 
+  late NewEntryBloc _newEntryBloc;
   late GlobalKey<ScaffoldState> _scaffoldKey;
 
   @override
@@ -26,6 +27,7 @@ class _NewEntryPageState extends State<NewEntryPage> {
     super.dispose();
     nameController.dispose();
     dosageController.dispose();
+    _newEntryBloc.dispose();
   }
 
   @override
@@ -33,7 +35,7 @@ class _NewEntryPageState extends State<NewEntryPage> {
     super.initState();
     nameController = TextEditingController();
     dosageController = TextEditingController();
-
+    _newEntryBloc = NewEntryBloc();
     _scaffoldKey = GlobalKey<ScaffoldState>();
   }
 
@@ -45,114 +47,113 @@ class _NewEntryPageState extends State<NewEntryPage> {
       appBar: AppBar(
         title: const Text('Add New'),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(2.h),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const PanelTitle(title: "Medicine Name", isRequired: true),
-            TextFormField(
-              maxLength: 15,
-              controller: dosageController,
-              textCapitalization: TextCapitalization.words,
-              decoration: const InputDecoration(
-                border: UnderlineInputBorder(),
-              ),
-              style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                    color: kOtherColor,
-                  ),
-            ),
-            const PanelTitle(title: "Dosage in mg", isRequired: false),
-            TextFormField(
-              maxLength: 15,
-              keyboardType: TextInputType.number,
-              textCapitalization: TextCapitalization.words,
-              decoration: const InputDecoration(
-                border: UnderlineInputBorder(),
-              ),
-              style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                    color: kOtherColor,
-                  ),
-            ),
-            SizedBox(height: 1.h),
-            const PanelTitle(title: 'Medicine Type', isRequired: false),
-            Padding(
-              padding: EdgeInsets.only(
-                top: 1.h,
-              ),
-              child: StreamBuilder(
-                builder: (context, snapshot) {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      MedicineTypeColumn(
-                          medicineType: MedicineType.bottle,
-                          name: 'Bottle',
-                          iconValue: 'assets/icons/bottle.svg',
-                          isSelected: snapshot.data == MedicineType.bottle
-                              ? true
-                              : false),
-                      MedicineTypeColumn(
-                          medicineType: MedicineType.pill,
-                          name: 'Pill',
-                          iconValue: 'assets/icons/pill.svg',
-                          isSelected: snapshot.data == MedicineType.pill
-                              ? true
-                              : false),
-                      MedicineTypeColumn(
-                          medicineType: MedicineType.syringe,
-                          name: 'Syringe',
-                          iconValue: 'assets/icons/syringe.svg',
-                          isSelected: snapshot.data == MedicineType.syringe
-                              ? true
-                              : false),
-                      MedicineTypeColumn(
-                          medicineType: MedicineType.tablet,
-                          name: 'Tablet',
-                          iconValue: 'assets/icons/tablet.svg',
-                          isSelected: snapshot.data == MedicineType.tablet
-                              ? true
-                              : false),
-                    ],
-                  );
-                },
-              ),
-            ),
-            const PanelTitle(title: 'Interval Selection', isRequired: true),
-            const IntervalSelection(),
-            const PanelTitle(title: 'Starting Time', isRequired: true),
-            const SelectTime(),
-            SizedBox(height: 1.h),
-            // Padding(
-            //   padding: EdgeInsets.only(
-            //     left: 7.5.w,
-            //     right: 7.5.w,
-            //   ),
-            Center(
-              child: SizedBox(
-                width: 50.w,
-                height: 6.5.h,
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    backgroundColor: kPrimaryColor,
-                    shape: const StadiumBorder(),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Confirm',
-                      style: Theme.of(context)
-                          .textTheme
-                          .subtitle2!
-                          .copyWith(color: kScaffoldColor),
+      body: Provider<NewEntryBloc>.value(
+        value: _newEntryBloc,
+        child: Padding(
+          padding: EdgeInsets.all(2.h),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const PanelTitle(title: "Medicine Name", isRequired: true),
+              TextFormField(
+                maxLength: 15,
+                controller: dosageController,
+                textCapitalization: TextCapitalization.words,
+                decoration: const InputDecoration(
+                  border: UnderlineInputBorder(),
+                ),
+                style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                      color: kOtherColor,
                     ),
-                  ),
-                  onPressed: () {
-                    //add medicine
+              ),
+              const PanelTitle(title: "Dosage in mg", isRequired: false),
+              TextFormField(
+                maxLength: 15,
+                keyboardType: TextInputType.number,
+                textCapitalization: TextCapitalization.words,
+                decoration: const InputDecoration(
+                  border: UnderlineInputBorder(),
+                ),
+                style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                      color: kOtherColor,
+                    ),
+              ),
+              SizedBox(height: 1.h),
+              const PanelTitle(title: 'Medicine Type', isRequired: false),
+              Padding(
+                padding: EdgeInsets.only(
+                  top: 1.h,
+                ),
+                child: StreamBuilder<MedicineType>(
+                  stream: _newEntryBloc.selectedMedicineType,
+                  builder: (context, snapshot) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        MedicineTypeColumn(
+                            medicineType: MedicineType.bottle,
+                            name: 'Bottle',
+                            iconValue: 'assets/icons/bottle.svg',
+                            isSelected: snapshot.data == MedicineType.bottle
+                                ? true
+                                : false),
+                        MedicineTypeColumn(
+                            medicineType: MedicineType.pill,
+                            name: 'Pill',
+                            iconValue: 'assets/icons/pill.svg',
+                            isSelected: snapshot.data == MedicineType.pill
+                                ? true
+                                : false),
+                        MedicineTypeColumn(
+                            medicineType: MedicineType.syringe,
+                            name: 'Syringe',
+                            iconValue: 'assets/icons/syringe.svg',
+                            isSelected: snapshot.data == MedicineType.syringe
+                                ? true
+                                : false),
+                        MedicineTypeColumn(
+                            medicineType: MedicineType.tablet,
+                            name: 'Tablet',
+                            iconValue: 'assets/icons/tablet.svg',
+                            isSelected: snapshot.data == MedicineType.tablet
+                                ? true
+                                : false),
+                      ],
+                    );
                   },
                 ),
               ),
-            )
-          ],
+              const PanelTitle(title: 'Interval Selection', isRequired: true),
+              const IntervalSelection(),
+              const PanelTitle(title: 'Starting Time', isRequired: true),
+              const SelectTime(),
+              SizedBox(height: 1.h),
+              Center(
+                child: SizedBox(
+                  width: 50.w,
+                  height: 6.5.h,
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: kPrimaryColor,
+                      shape: const StadiumBorder(),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Confirm',
+                        style: Theme.of(context)
+                            .textTheme
+                            .subtitle2!
+                            .copyWith(color: kScaffoldColor),
+                      ),
+                    ),
+                    onPressed: () {
+                      //add medicine
+                    },
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -302,11 +303,11 @@ class MedicineTypeColumn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final NewEntryBloc newEntryBloc = Provider.of<NewEntryBloc>(context);
+    final NewEntryBloc newEntryBloc = Provider.of<NewEntryBloc>(context);
     return GestureDetector(
       onTap: () {
         //select medicine Type
-        // newEntryBloc.updateSelectedMedicine(medicineType);
+        newEntryBloc.updateSelectedMedicine(medicineType);
       },
       child: Column(
         children: [

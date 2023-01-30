@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mra/constants.dart';
 import 'package:mra/pages/new_entry/new_entry_page.dart';
 import 'package:sizer/sizer.dart';
@@ -80,13 +81,13 @@ class TopContainer extends StatelessWidget {
           child: Text('Welcome to Daily Dose.',
               style: Theme.of(context).textTheme.subtitle2),
         ),
-        SizedBox(
-          height: 2.h,
-        ),
+        // SizedBox(
+        //   height: 1.h,
+        // ),
         Container(
           alignment: Alignment.center,
           padding: EdgeInsets.only(
-            top: 2.h,
+            top: 1.h,
             bottom: 1.h,
           ),
           child: Text(
@@ -104,11 +105,75 @@ class BottomContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'No Medicine',
-        textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.headline3,
+    // later we will use condition
+
+    // return Center(
+    //   child: Text(
+    //     'No Medicine',
+    //     textAlign: TextAlign.center,
+    //     style: Theme.of(context).textTheme.headline3,
+    //   ),
+    return GridView.builder(
+      padding: EdgeInsets.only(top: 1.h),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+      ),
+      itemCount: 4,
+      itemBuilder: (context, index) {
+        return MedicineCard();
+      },
+    );
+  }
+}
+
+class MedicineCard extends StatelessWidget {
+  const MedicineCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      highlightColor: Colors.white,
+      splashColor: Colors.grey,
+      onTap: () {
+        //go to details activity with animation, later
+      },
+      child: Container(
+        padding: EdgeInsets.fromLTRB(3.w, 0.h, 2.w, 1.h),
+        margin: EdgeInsets.all(1.h),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(2.h),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Spacer(),
+            SvgPicture.asset(
+              'assets/icons/bottle.svg',
+              height: 12.5.h,
+              color: kOtherColor,
+            ),
+            const Spacer(),
+            //hero tag animation,later
+            Text(
+              'Calpol',
+              overflow: TextOverflow.fade,
+              textAlign: TextAlign.start,
+              style: Theme.of(context).textTheme.headline6,
+            ),
+            SizedBox(
+              height: 0.3.h,
+            ),
+            //time interval data with condition, later
+            Text(
+              'Every 8 hours',
+              overflow: TextOverflow.fade,
+              textAlign: TextAlign.start,
+              style: Theme.of(context).textTheme.caption,
+            ),
+          ],
+        ),
       ),
     );
   }
