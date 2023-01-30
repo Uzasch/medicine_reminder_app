@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mra/constants.dart';
+import 'package:mra/pages/medicine_details/medicine_details.dart';
 import 'package:mra/pages/new_entry/new_entry_page.dart';
 import 'package:sizer/sizer.dart';
 
@@ -92,7 +93,7 @@ class TopContainer extends StatelessWidget {
           ),
           child: Text(
             '0',
-            style: Theme.of(context).textTheme.headline5,
+            style: Theme.of(context).textTheme.headline2,
           ),
         ),
       ],
@@ -136,6 +137,10 @@ class MedicineCard extends StatelessWidget {
       splashColor: Colors.grey,
       onTap: () {
         //go to details activity with animation, later
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MedicineDetails()),
+        );
       },
       child: Container(
         padding: EdgeInsets.fromLTRB(3.w, 0.h, 2.w, 1.h),

@@ -56,6 +56,11 @@ class _MyAppState extends State<MyApp> {
               ),
 
               textTheme: TextTheme(
+                headline2: GoogleFonts.poppins(
+                  fontSize: 40.sp,
+                  fontWeight: FontWeight.w700,
+                  color: kTextColor,
+                ),
                 headline3: GoogleFonts.raleway(
                   fontSize: 30.sp,
                   color: kSecondaryColor,
@@ -67,9 +72,9 @@ class _MyAppState extends State<MyApp> {
                   color: kTextColor,
                 ),
                 headline5: GoogleFonts.raleway(
-                  fontSize: 40.sp,
-                  fontWeight: FontWeight.w600,
+                  fontSize: 16.sp,
                   color: kTextColor,
+                  fontWeight: FontWeight.w900,
                 ),
                 headline6: GoogleFonts.poppins(
                   fontSize: 13.sp,
@@ -79,7 +84,7 @@ class _MyAppState extends State<MyApp> {
                 ),
                 subtitle2: GoogleFonts.poppins(
                   fontSize: 12.sp,
-                  color: kTextColor,
+                  color: kTextLightColor,
                 ),
                 caption: GoogleFonts.poppins(
                   fontSize: 9.sp,
