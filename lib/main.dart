@@ -54,53 +54,62 @@ class MyApp extends StatelessWidget {
               fontWeight: FontWeight.w600,
               color: kTextColor,
             ),
-            subtitle2: GoogleFonts.poppins(fontSize: 12.sp, color: kTextColor),
-            caption: GoogleFonts.poppins(
-              fontSize: 9.sp,
-              fontWeight: FontWeight.w500,
-              color: kPrimaryColor,
-            ),
-            labelMedium: TextStyle(
-              fontSize: 10.sp,
-              fontWeight: FontWeight.w400,
-              color: kTextColor,
-            ),
-          ),
-          inputDecorationTheme: const InputDecorationTheme(
-            enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(
-                color: kTextLightColor,
-                width: 0.7,
+                headline6: GoogleFonts.poppins(
+                  fontSize: 13.sp,
+                  color: kTextColor,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 1.0,
+                ),
+                subtitle2: GoogleFonts.poppins(
+                  fontSize: 12.sp,
+                  color: kTextColor,
+                ),
+                caption: GoogleFonts.poppins(
+                  fontSize: 9.sp,
+                  fontWeight: FontWeight.w500,
+                  color: kPrimaryColor,
+                ),
+                labelMedium: TextStyle(
+                  fontSize: 10.sp,
+                  fontWeight: FontWeight.w400,
+                  color: kTextColor,
+                ),
+              ),
+              inputDecorationTheme: const InputDecorationTheme(
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    color: kTextLightColor,
+                    width: 0.7,
+                  ),
+                ),
+                border: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    color: kTextLightColor,
+                  ),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    color: kPrimaryColor,
+                  ),
+                ),
+              ),
+              timePickerTheme: TimePickerThemeData(
+                backgroundColor: kScaffoldColor,
+                hourMinuteColor: kTextColor,
+                hourMinuteTextColor: kScaffoldColor,
+                dayPeriodColor: kTextColor,
+                dayPeriodTextColor: kScaffoldColor,
+                dialBackgroundColor: kTextColor,
+                dialHandColor: kPrimaryColor,
+                dialTextColor: kScaffoldColor,
+                entryModeIconColor: kPrimaryColor,
+                dayPeriodTextStyle: GoogleFonts.raleway(
+                  fontSize: 7.5.sp,
+                ),
               ),
             ),
-            border: UnderlineInputBorder(
-              borderSide: BorderSide(
-                color: kTextLightColor,
-              ),
-            ),
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(
-                color: kPrimaryColor,
-              ),
-            ),
-          ),
-          timePickerTheme: TimePickerThemeData(
-            backgroundColor: kScaffoldColor,
-            hourMinuteColor: kTextColor,
-            hourMinuteTextColor: kScaffoldColor,
-            dayPeriodColor: kTextColor,
-            dayPeriodTextColor: kScaffoldColor,
-            dialBackgroundColor: kTextColor,
-            dialHandColor: kPrimaryColor,
-            dialTextColor: kScaffoldColor,
-            entryModeIconColor: kPrimaryColor,
-            dayPeriodTextStyle: GoogleFonts.raleway(
-              fontSize: 7.5.sp,
-            ),
-          ),
-        ),
-        home: const HomePage(),
-      );
+            home: const HomePage(),
+          );
     });
   }
 }
