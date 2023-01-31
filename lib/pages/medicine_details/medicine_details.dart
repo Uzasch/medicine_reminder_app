@@ -35,10 +35,13 @@ class _MedicineDetailsState extends State<MedicineDetails> {
                 ),
                 onPressed: () {
                   //open alert dialog box, later
+                  openAlertBox(context);
                 },
                 child: Text(
                   'Delete',
-                  style: Theme.of(context).textTheme.subtitle1,
+                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                        color: kScaffoldColor,
+                      ),
                 ),
               ),
             ),
@@ -48,6 +51,48 @@ class _MedicineDetailsState extends State<MedicineDetails> {
           ],
         ),
       ),
+    );
+  }
+
+  openAlertBox(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(20.0),
+            ),
+          ),
+          title: Text(
+            'Delete This Reminder?',
+            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                  color: kScaffoldColor,
+                ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                'Cancel',
+                style: Theme.of(context).textTheme.caption,
+              ),
+            ),
+            TextButton(
+              onPressed: () {},
+              child: Text(
+                'OK',
+                style: Theme.of(context)
+                    .textTheme
+                    .caption!
+                    .copyWith(color: kSecondaryColor),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }
@@ -61,9 +106,9 @@ class MainSection extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         SvgPicture.asset(
-          'assets/icons/bottle.svg',
+          'assets/icons/tablet.svg',
           height: 12.5.h,
-          color: kOtherColor,
+          color: kSecondaryColor,
         ),
         SizedBox(
           width: 1.w,

@@ -18,7 +18,6 @@ class NewEntryPage extends StatefulWidget {
 class _NewEntryPageState extends State<NewEntryPage> {
   late TextEditingController nameController;
   late TextEditingController dosageController;
-
   late NewEntryBloc _newEntryBloc;
   late GlobalKey<ScaffoldState> _scaffoldKey;
 
@@ -359,6 +358,7 @@ class MedicineTypeColumn extends StatelessWidget {
   }
 }
 
+//medicine name,dosage field name
 class PanelTitle extends StatelessWidget {
   const PanelTitle({Key? key, required this.title, required this.isRequired})
       : super(key: key);

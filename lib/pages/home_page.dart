@@ -79,7 +79,7 @@ class TopContainer extends StatelessWidget {
           padding: EdgeInsets.only(
             bottom: 1.h,
           ),
-          child: Text('Welcome to Daily Dose.',
+          child: Text('Welcome for your daily doses.',
               style: Theme.of(context).textTheme.subtitle2),
         ),
         // SizedBox(
@@ -91,11 +91,25 @@ class TopContainer extends StatelessWidget {
             top: 1.h,
             bottom: 1.h,
           ),
-          child: Text(
-            '0',
-            style: Theme.of(context).textTheme.headline2,
+          child: Column(
+            // crossAxisAlignment: CrossAxisAlignment.baseline,
+            // textBaseline: TextBaseline.ideographic,
+            children: [
+              Text(
+                '0',
+                style: Theme.of(context).textTheme.headline2,
+              ),
+              Text(
+                'Medicines',
+                style: Theme.of(context).textTheme.headline2!.copyWith(
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.w400,
+                    ),
+              ),
+            ],
           ),
         ),
+        HealthKit(),
       ],
     );
   }
@@ -155,7 +169,7 @@ class MedicineCard extends StatelessWidget {
           children: [
             const Spacer(),
             SvgPicture.asset(
-              'assets/icons/bottle.svg',
+              'assets/icons/tablet.svg',
               height: 12.5.h,
               color: kOtherColor,
             ),
@@ -176,6 +190,55 @@ class MedicineCard extends StatelessWidget {
               overflow: TextOverflow.fade,
               textAlign: TextAlign.start,
               style: Theme.of(context).textTheme.caption,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class HealthKit extends StatelessWidget {
+  const HealthKit({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      highlightColor: Colors.white,
+      splashColor: Colors.grey,
+      onTap: () {
+        //go to details activity with animation, later
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => MedicineDetails()),
+        // );
+      },
+      child: Container(
+        padding: EdgeInsets.fromLTRB(3.w, 0.h, 2.w, 1.h),
+        margin: EdgeInsets.all(1.h),
+        height: 8.75.h,
+        decoration: BoxDecoration(
+          color: kPrimaryColor,
+          borderRadius: BorderRadius.circular(2.h),
+        ),
+        child: Row(
+          // crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Heart Rate and \n'
+              'Pulse Monitoring',
+              overflow: TextOverflow.fade,
+              textAlign: TextAlign.start,
+              style: Theme.of(context).textTheme.headline6!.copyWith(
+                    fontSize: 16.sp,
+                    color: kScaffoldColor,
+                  ),
+            ),
+            SvgPicture.asset(
+              'assets/icons/arrow.svg',
+              height: 3.75.h,
+              color: kScaffoldColor,
             ),
           ],
         ),

@@ -82,6 +82,10 @@ class _MyAppState extends State<MyApp> {
                   fontWeight: FontWeight.w600,
                   letterSpacing: 1.0,
                 ),
+                subtitle1: GoogleFonts.poppins(
+                  fontSize: 15.sp,
+                  color: kPrimaryColor,
+                ),
                 subtitle2: GoogleFonts.poppins(
                   fontSize: 12.sp,
                   color: kTextLightColor,
