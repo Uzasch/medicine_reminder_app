@@ -58,7 +58,7 @@ class _MyAppState extends State<MyApp> {
               textTheme: TextTheme(
                 headline2: GoogleFonts.poppins(
                   fontSize: 40.sp,
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.w600,
                   color: kTextColor,
                 ),
                 headline3: GoogleFonts.raleway(
