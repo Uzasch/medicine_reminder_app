@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mra/constants.dart';
+import 'package:mra/global_bloc.dart';
 import 'package:mra/pages/new_entry/new_entry_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
@@ -19,17 +20,17 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
-  NewEntryBloc? newEntryBloc;
+  GlobalBloc? globalBloc;
   @override
   void initState() {
-    newEntryBloc = NewEntryBloc();
+    globalBloc = GlobalBloc();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Provider<NewEntryBloc>.value(
-      value: newEntryBloc!,
+    return Provider<GlobalBloc>.value(
+      value: globalBloc!,
       child: Sizer(
         builder: (context, orientation, deviceType) {
           return MaterialApp(

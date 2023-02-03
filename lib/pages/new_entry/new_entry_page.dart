@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mra/constants.dart';
+import 'package:mra/global_bloc.dart';
 import 'package:mra/pages/new_entry/new_entry_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
@@ -40,6 +41,7 @@ class _NewEntryPageState extends State<NewEntryPage> {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalBloc globalBloc = Provider.of<GlobalBloc>(context);
     return Scaffold(
       key: _scaffoldKey,
       resizeToAvoidBottomInset: false,
@@ -124,13 +126,16 @@ class _NewEntryPageState extends State<NewEntryPage> {
               ),
               const PanelTitle(title: 'Interval Selection', isRequired: true),
               const IntervalSelection(),
+              SizedBox(
+                height: 2.5.h,
+              ),
               const PanelTitle(title: 'Starting Time', isRequired: true),
               const SelectTime(),
               SizedBox(height: 1.h),
               Center(
                 child: SizedBox(
                   width: 50.w,
-                  height: 6.5.h,
+                  height: 7.5.h,
                   child: TextButton(
                     style: TextButton.styleFrom(
                       backgroundColor: kPrimaryColor,
@@ -241,7 +246,9 @@ class _IntervalSelectionState extends State<IntervalSelection> {
         children: [
           Text(
             'Remind me every',
-            style: Theme.of(context).textTheme.subtitle2,
+            style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                  color: kTextColor,
+                ),
           ),
           DropdownButton(
             iconEnabledColor: kOtherColor,
@@ -250,7 +257,9 @@ class _IntervalSelectionState extends State<IntervalSelection> {
             hint: _selected == 0
                 ? Text(
                     'Select an Interval',
-                    style: Theme.of(context).textTheme.caption,
+                    style: Theme.of(context).textTheme.caption!.copyWith(
+                          color: kPrimaryColor,
+                        ),
                   )
                 : null,
             elevation: 4,
@@ -278,7 +287,9 @@ class _IntervalSelectionState extends State<IntervalSelection> {
           ),
           Text(
             _selected == 1 ? "hour" : "hours",
-            style: Theme.of(context).textTheme.subtitle2,
+            style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                  color: kTextColor,
+                ),
           ),
         ],
       ),
