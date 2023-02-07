@@ -1,3 +1,5 @@
+// import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mra/constants.dart';
@@ -27,29 +29,61 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: InkResponse(
-        onTap: () {
-          //go to new entry page
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const NewEntryPage(),
-            ),
-          );
-        },
-        child: SizedBox(
-          child: Card(
-            color: kPrimaryColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(5.h),
-            ),
-            child: Icon(
-              Icons.add_outlined,
-              color: kScaffoldColor,
-              size: 50.sp,
+      floatingActionButton: Row(
+        children: [
+          InkResponse(
+            onTap: () {
+              //go to new entry page
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => const NewEntryPage(),
+              //   ),
+              // );
+            },
+            child: Container(
+              margin: const EdgeInsets.only(left: 30.0),
+              child: SizedBox(
+                width: 73.5.w,
+                child: Card(
+                  color: kPrimaryColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(1.h),
+                  ),
+                  child: Icon(
+                    Icons.add_outlined,
+                    color: kScaffoldColor,
+                    size: 50.sp,
+                  ),
+                ),
+              ),
             ),
           ),
-        ),
+          InkResponse(
+            onTap: () {
+              //go to new entry page
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const NewEntryPage(),
+                ),
+              );
+            },
+            child: SizedBox(
+              child: Card(
+                color: kPrimaryColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.h),
+                ),
+                child: Icon(
+                  Icons.add_outlined,
+                  color: kScaffoldColor,
+                  size: 50.sp,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -109,7 +143,7 @@ class TopContainer extends StatelessWidget {
             ],
           ),
         ),
-        HealthKit(),
+        // HealthKit(),
       ],
     );
   }
@@ -198,51 +232,51 @@ class MedicineCard extends StatelessWidget {
   }
 }
 
-class HealthKit extends StatelessWidget {
-  const HealthKit({super.key});
+// class HealthKit extends StatelessWidget {
+//   const HealthKit({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      highlightColor: Colors.white,
-      splashColor: Colors.grey,
-      onTap: () {
-        //go to details activity with animation, later
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(builder: (context) => MedicineDetails()),
-        // );
-      },
-      child: Container(
-        padding: EdgeInsets.fromLTRB(3.w, 0.h, 2.w, 1.h),
-        margin: EdgeInsets.all(1.h),
-        height: 8.75.h,
-        decoration: BoxDecoration(
-          color: kPrimaryColor,
-          borderRadius: BorderRadius.circular(2.h),
-        ),
-        child: Row(
-          // crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Heart Rate and \n'
-              'Pulse Monitoring',
-              overflow: TextOverflow.fade,
-              textAlign: TextAlign.start,
-              style: Theme.of(context).textTheme.headline6!.copyWith(
-                    fontSize: 16.sp,
-                    color: kScaffoldColor,
-                  ),
-            ),
-            SvgPicture.asset(
-              'assets/icons/arrow.svg',
-              height: 3.75.h,
-              color: kScaffoldColor,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return InkWell(
+//       highlightColor: Colors.white,
+//       splashColor: Colors.grey,
+//       onTap: () {
+//         //go to details activity with animation, later
+//         // Navigator.push(
+//         //   context,
+//         //   MaterialPageRoute(builder: (context) => MedicineDetails()),
+//         // );
+//       },
+//       child: Container(
+//         padding: EdgeInsets.fromLTRB(3.w, 0.h, 2.w, 1.h),
+//         margin: EdgeInsets.all(1.h),
+//         height: 8.75.h,
+//         decoration: BoxDecoration(
+//           color: kPrimaryColor,
+//           borderRadius: BorderRadius.circular(2.h),
+//         ),
+//         child: Row(
+//           // crossAxisAlignment: CrossAxisAlignment.start,
+//           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//           children: [
+//             Text(
+//               'Heart Rate and \n'
+//               'Pulse Monitoring',
+//               overflow: TextOverflow.fade,
+//               textAlign: TextAlign.start,
+//               style: Theme.of(context).textTheme.headline6!.copyWith(
+//                     fontSize: 16.sp,
+//                     color: kScaffoldColor,
+//                   ),
+//             ),
+//             SvgPicture.asset(
+//               'assets/icons/arrow.svg',
+//               height: 3.75.h,
+//               color: kScaffoldColor,
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }

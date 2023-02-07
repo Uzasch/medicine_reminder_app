@@ -1,6 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:mra/constants.dart';
 import 'package:mra/global_bloc.dart';
+import 'package:mra/models/errors.dart';
+import 'package:mra/models/medicine.dart';
 import 'package:mra/pages/new_entry/new_entry_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
@@ -152,6 +156,62 @@ class _NewEntryPageState extends State<NewEntryPage> {
                     ),
                     onPressed: () {
                       //add medicine
+                      String? medicineName;
+                      int? dosage;
+                      //medicine
+                      if (nameController.text == "") {
+                        _newEntryBloc.submitError(EntryError.nameNull);
+                        return;
+                      }
+                      if (nameController.text != "") {
+                        medicineName = nameController.text;
+                      }
+                      //dosage
+                      if (dosageController.text == "") {
+                        dosage = 0;
+                      }
+                      if (dosageController.text != "") {
+                        dosage = int.parse(dosageController.text);
+                      }
+                      for (var medicine in globalBloc.medicineList$!.value) {
+                        if (medicineName == medicine.medicineName) {
+                          _newEntryBloc.submitError(EntryError.nameDuplicate);
+                          return;
+                        }
+                      }
+                      if (_newEntryBloc.selectIntervals!.value == 0) {
+                        _newEntryBloc.submitError(EntryError.interval);
+                        return;
+                      }
+                      if (_newEntryBloc.selectedTimeOfDay$!.value == 'None') {
+                        _newEntryBloc.submitError(EntryError.startTime);
+                        return;
+                      }
+                      String medicineType = _newEntryBloc
+                          .selectedMedicineType!.value
+                          .toString()
+                          .substring(13);
+
+                      int interval = _newEntryBloc.selectIntervals!.value;
+                      String startTime =
+                          _newEntryBloc.selectedTimeOfDay$!.value;
+
+                      List<int> intIDs =
+                          makeIDs(24 / _newEntryBloc.selectIntervals!.value);
+                      List<String> notificationIDs =
+                          intIDs.map((i) => i.toString()).toList();
+
+                      Medicine newEntryMedicine = Medicine(
+                        notificationIDs: notificationIDs,
+                        medicineName: medicineName,
+                        dosage: dosage,
+                        interval: interval,
+                        startTime: startTime,
+                      );
+                      //update medicine list via global bloc
+                      globalBloc.updateMedicineList(newEntryMedicine);
+                      // schedule notification
+                      // go to success screen
                     },
                   ),
                 ),
@@ -161,6 +221,15 @@ class _NewEntryPageState extends State<NewEntryPage> {
         ),
       ),
     );
+  }
+
+  List<int> makeIDs(double n) {
+    var rng = Random();
+    List<int> ids = [];
+    for (int i = 0; i < n; i++) {
+      ids.add(rng.nextInt(1000000000));
+    }
+    return ids;
   }
 }
 
