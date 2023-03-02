@@ -12,6 +12,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../common/convert_time.dart';
 import '../../models/medicine_type.dart';
+import '../success_screen/success_screen.dart';
 
 class NewEntryPage extends StatefulWidget {
   const NewEntryPage({Key? key}) : super(key: key);
@@ -41,6 +42,7 @@ class _NewEntryPageState extends State<NewEntryPage> {
     dosageController = TextEditingController();
     _newEntryBloc = NewEntryBloc();
     _scaffoldKey = GlobalKey<ScaffoldState>();
+    initializeErrorListen();
   }
 
   @override
@@ -62,7 +64,7 @@ class _NewEntryPageState extends State<NewEntryPage> {
               const PanelTitle(title: "Medicine Name", isRequired: true),
               TextFormField(
                 maxLength: 15,
-                controller: dosageController,
+                controller: nameController,
                 textCapitalization: TextCapitalization.words,
                 decoration: const InputDecoration(
                   border: UnderlineInputBorder(),
@@ -212,6 +214,10 @@ class _NewEntryPageState extends State<NewEntryPage> {
                       globalBloc.updateMedicineList(newEntryMedicine);
                       // schedule notification
                       // go to success screen
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SuccessScreen()));
                     },
                   ),
                 ),
@@ -219,6 +225,40 @@ class _NewEntryPageState extends State<NewEntryPage> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  void initializeErrorListen() {
+    _newEntryBloc.errorState$!.listen((EntryError error) {
+      switch (error) {
+        case EntryError.nameNull:
+          displayError("Please enter the medicine's name");
+          break;
+        case EntryError.nameDuplicate:
+          displayError("Medicine name already exist");
+          break;
+
+        case EntryError.dosage:
+          displayError("Please enter the dosage");
+          break;
+        case EntryError.interval:
+          displayError("Please select the reminder's interval");
+          break;
+        case EntryError.startTime:
+          displayError("Please enter the reminder's starting time");
+          break;
+        default:
+      }
+    });
+  }
+
+  void displayError(String error) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: kOtherColor,
+        content: Text(error),
+        duration: const Duration(milliseconds: 2000),
       ),
     );
   }
@@ -306,6 +346,7 @@ class _IntervalSelectionState extends State<IntervalSelection> {
   var _selected = 0;
   @override
   Widget build(BuildContext context) {
+    final NewEntryBloc newEntryBloc = Provider.of<NewEntryBloc>(context);
     return Padding(
       padding: EdgeInsets.only(
         top: 1.h,
@@ -350,6 +391,7 @@ class _IntervalSelectionState extends State<IntervalSelection> {
               setState(
                 () {
                   _selected = newVal!;
+                  newEntryBloc.updateInterval(newVal);
                 },
               );
             },

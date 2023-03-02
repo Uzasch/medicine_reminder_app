@@ -49,6 +49,6 @@ class GlobalBloc {
   }
 
   void dispose() {
-    medicineList$!.close();
+    _medicineList$!.close();
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mra/constants.dart';
 import 'package:mra/global_bloc.dart';
-import 'package:mra/pages/new_entry/new_entry_bloc.dart';
+// import 'package:mra/pages/new_entry/new_entry_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'pages/home_page.dart';

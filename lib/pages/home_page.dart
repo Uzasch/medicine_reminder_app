@@ -44,7 +44,7 @@ class HomePage extends StatelessWidget {
             child: Container(
               margin: const EdgeInsets.only(left: 30.0),
               child: SizedBox(
-                width: 73.5.w,
+                width: 72.w,
                 child: Card(
                   color: kPrimaryColor,
                   shape: RoundedRectangleBorder(
@@ -187,7 +187,7 @@ class MedicineCard extends StatelessWidget {
         //go to details activity with animation, later
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => MedicineDetails()),
+          MaterialPageRoute(builder: (context) => const MedicineDetails()),
         );
       },
       child: Container(

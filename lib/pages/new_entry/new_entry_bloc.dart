@@ -1,7 +1,6 @@
-import 'package:mra/models/errors.dart';
-import 'package:mra/models/medicine_type.dart';
-import 'package:mra/pages/new_entry/new_entry_page.dart';
 import 'package:rxdart/rxdart.dart';
+import '../../models/errors.dart';
+import '../../models/medicine_type.dart';
 
 class NewEntryBloc {
   BehaviorSubject<MedicineType>? _selectedMedicineType$;
@@ -14,6 +13,7 @@ class NewEntryBloc {
   BehaviorSubject<String>? _selectedTimeOfDay$;
   BehaviorSubject<String>? get selectedTimeOfDay$ => _selectedTimeOfDay$;
 
+  //error state
   BehaviorSubject<EntryError>? _errorState$;
   BehaviorSubject<EntryError>? get errorState$ => _errorState$;
 
@@ -25,6 +25,7 @@ class NewEntryBloc {
     _selectedInterval$ = BehaviorSubject<int>.seeded(0);
     _errorState$ = BehaviorSubject<EntryError>();
   }
+
   void dispose() {
     _selectedMedicineType$!.close();
     _selectedTimeOfDay$!.close();
